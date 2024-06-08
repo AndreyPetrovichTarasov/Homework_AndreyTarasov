@@ -1,3 +1,4 @@
+import datetime
 from masks import get_mask_card_number
 from masks import get_mask_account
 
@@ -19,4 +20,9 @@ def mask_account_card(account_card: str) -> str:
     return account_card_word + " " + final_numbers
 
 
-print(mask_account_card("Счет 73654108430135874305"))
+def get_data(date: str) -> str:
+    """функция преобразует формат даты в день.месяц.год"""
+    date_obj = datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f")
+    formatted_date = date_obj.strftime("%d.%m.%Y")
+
+    return formatted_date
