@@ -1,6 +1,6 @@
 import datetime
-from masks import get_mask_card_number
-from masks import get_mask_account
+
+from .masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(account_card: str) -> str:
@@ -17,7 +17,7 @@ def mask_account_card(account_card: str) -> str:
     else:
         final_numbers = get_mask_account(int(account_card_digits))
 
-    return account_card_word + " " + final_numbers
+    return str(account_card_word + " " + final_numbers)
 
 
 def get_data(date: str) -> str:
