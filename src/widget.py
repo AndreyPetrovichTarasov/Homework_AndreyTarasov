@@ -1,0 +1,22 @@
+from masks import get_mask_card_number
+from masks import get_mask_account
+
+
+def mask_account_card(account_card: str) -> str:
+    """Функция маскирует номер счета/карты с добавлением названия карты или счета"""
+    account_card_word = ""
+    account_card_digits = ""
+    for char in account_card:
+        if char.isalpha():
+            account_card_word += char
+        elif char.isdigit():
+            account_card_digits += char
+    if len(account_card_digits) == 16:
+        final_numbers = get_mask_card_number(int(account_card_digits))
+    else:
+        final_numbers = get_mask_account(int(account_card_digits))
+
+    return account_card_word + " " + final_numbers
+
+
+print(mask_account_card("Счет 73654108430135874305"))
