@@ -10,7 +10,7 @@
 git clone https://github.com/username/myblog.git
 ```
 
-2. Установите зависимости:
+2. Установите зависимостей:
 ```
 pip install -r requirements.txt
 ```
