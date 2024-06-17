@@ -7,7 +7,6 @@ __pycache__/
 .gitignore
 
 poetry.lock
-tests
 
 # C extensions
 *.so
