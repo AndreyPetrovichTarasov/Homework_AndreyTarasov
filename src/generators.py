@@ -77,11 +77,11 @@ transactions = [
 ]
 
 
-def filter_by_currency(transactions, currency):
+def filter_by_currency(operations, currency):
     """
     Фильтрует операции по указанной валюте.
     """
-    return (element["id"] for element in transactions if element['operationAmount']['currency']['code'] == currency)
+    return (element["id"] for element in operations if element['operationAmount']['currency']['code'] == currency)
 
 
 # Пример использования
@@ -92,11 +92,11 @@ for transaction in usd_transactions:
     print(transaction)
 
 
-def transaction_descriptions(transactions):
+def transaction_descriptions(operations):
     """
     Фильтрует операции по указанной валюте.
     """
-    return (element["description"] for element in transactions)
+    return (element["description"] for element in operations)
 
 
 # Пример использования
