@@ -23,7 +23,6 @@ def test_log_err3():
 
     with pytest.raises(TypeError):
         log_file = Path(ROOT_PATH, "log_file.txt")
-        print(log_file)
 
         add(1, "2")
 
