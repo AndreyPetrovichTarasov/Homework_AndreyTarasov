@@ -1,6 +1,5 @@
 import sys
 import os
-import json
 import requests
 from pathlib import Path
 from dotenv import load_dotenv
@@ -67,6 +66,6 @@ if __name__ == "__main__":
     operations_path = Path(ROOT_PATH, "operations.json")
     returned_list = transforming_operations(operations_path)
 
-    for i in range(10):
+    for i in range(5):
         one_operation = converting_payment(returned_list[i])
         print(one_operation)
