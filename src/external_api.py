@@ -1,9 +1,8 @@
-import sys
 import os
-import requests
+import sys
 from pathlib import Path
+import requests
 from dotenv import load_dotenv
-
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 from data.config import ROOT_PATH
 from src.utils import transforming_operations
@@ -65,7 +64,8 @@ def converting_payment(transaction):
 if __name__ == "__main__":
     operations_path = Path(ROOT_PATH, "operations.json")
     returned_list = transforming_operations(operations_path)
+    print(returned_list[0])
 
-    for i in range(5):
+    for i in range(1):
         one_operation = converting_payment(returned_list[i])
         print(one_operation)
