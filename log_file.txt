@@ -1,0 +1,1 @@
+add error:unsupported operand type(s) for +: 'int' and 'str' . Inputs: (1, '2'), {}
