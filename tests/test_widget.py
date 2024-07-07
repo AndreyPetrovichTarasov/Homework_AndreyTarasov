@@ -1,9 +1,12 @@
 import pytest
-from src.widget import mask_account_card, get_data
+
+from src.widget import get_data, mask_account_card
 
 
-@pytest.mark.parametrize("card_account, expected", [("Maestro 1596837868705199", "Maestro 1596 83** **** 5199"),
-                                                    ("Счет 64686473678894779589", "Счет **9589")])
+@pytest.mark.parametrize(
+    "card_account, expected",
+    [("Maestro 1596837868705199", "Maestro 1596 83** **** 5199"), ("Счет 64686473678894779589", "Счет **9589")],
+)
 def test_mask_account_card(card_account, expected):
     assert mask_account_card(card_account) == expected
 

@@ -1,18 +1,23 @@
 import logging
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    filename='../logs/masks.log',  # Запись логов в файл
-                    filemode='w')  # Перезапись файла при каждом запуске
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    filename="../logs/masks.log",  # Запись логов в файл
+    filemode="w",
+)  # Перезапись файла при каждом запуске
+"""
+Задаем конфигурацию логгера
+"""
 
 get_mask_card_logger = logging.getLogger("masks.get_mask_card_number")
-get_mask_account_logger = logging.getLogger('masks.get_mask_account')
+get_mask_account_logger = logging.getLogger("masks.get_mask_account")
 
 
 def get_mask_card_number(card_number: int) -> str:
     """Функция принимает номер карты и возвращает ее маску."""
     if type(card_number) is int and len(str(card_number)) == 16:
-        get_mask_card_logger.info(f"Создание маски для номера карты")
+        get_mask_card_logger.info("Создание маски для номера карты")
         return f"{str(card_number)[:4]} {str(card_number)[4:6]}** **** {str(card_number)[12:]}"
     else:
         get_mask_card_logger.warning("Неверный формат номера карты")

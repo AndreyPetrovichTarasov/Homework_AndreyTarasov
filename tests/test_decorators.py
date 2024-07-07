@@ -1,7 +1,9 @@
-import pytest
-from src.decorators import log, my_function
-from src.config import ROOT_PATH
 from pathlib import Path
+
+import pytest
+
+from src.config import ROOT_PATH
+from src.decorators import log
 
 
 def test_log():
@@ -14,7 +16,7 @@ def test_log():
 
 
 @log(filename="log_file.txt")
-#@log()
+# @log()
 def add(x, y):
     return x + y
 
@@ -28,7 +30,6 @@ def test_log_err3():
 
     assert log_file.exists()
 
-    with open(log_file, 'r') as f:
+    with open(log_file, "r") as f:
         log_contents = f.read()
         assert "add error:unsupported operand type(s) for +: 'int' and 'str' . Inputs: (1, '2'), {}" in log_contents
-
