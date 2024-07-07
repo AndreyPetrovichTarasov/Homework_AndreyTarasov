@@ -1,15 +1,17 @@
 import os
 import sys
 from pathlib import Path
+
 import requests
 from dotenv import load_dotenv
+
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 from data.config import ROOT_PATH
 from src.utils import transforming_operations
 
 ROOT_PATH2 = Path(__file__).resolve().parent.parent
 
-env_path = ROOT_PATH2 / '.env'
+env_path = ROOT_PATH2 / ".env"
 
 load_dotenv(env_path)
 
@@ -31,14 +33,8 @@ def converting_payment(transaction):
     elif transaction["operationAmount"]["currency"]["code"] == "USD":
         url = "https://api.apilayer.com/exchangerates_data/convert"
 
-        payload = {
-            "amount": transaction["operationAmount"]["amount"],
-            "from": "USD",
-            "to": "RUB"
-        }
-        headers = {
-            "apikey": API_KEY
-        }
+        payload = {"amount": transaction["operationAmount"]["amount"], "from": "USD", "to": "RUB"}
+        headers = {"apikey": API_KEY}
         response = requests.get(url, headers=headers, params=payload)
         result_json = response.json()
 
@@ -47,14 +43,8 @@ def converting_payment(transaction):
     elif transaction["operationAmount"]["currency"]["code"] == "EURO":
         url = "https://api.apilayer.com/exchangerates_data/convert"
 
-        payload = {
-            "amount": transaction["operationAmount"]["amount"],
-            "from": "EURO",
-            "to": "RUB"
-        }
-        headers = {
-            "apikey": API_KEY
-        }
+        payload = {"amount": transaction["operationAmount"]["amount"], "from": "EURO", "to": "RUB"}
+        headers = {"apikey": API_KEY}
         response = requests.get(url, headers=headers, params=payload)
         result_json = response.json()
 
