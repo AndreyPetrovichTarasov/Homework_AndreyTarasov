@@ -4,6 +4,7 @@ import sys
 from pathlib import Path
 import csv
 import pandas as pd
+
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 from data.config import ROOT_PATH
 
@@ -44,22 +45,49 @@ def transforming_operations(filename):
 
         except FileNotFoundError:
             transforming_operations_logger.error("Файл не найден")
+
             return []
+
         except json.JSONDecodeError:
             transforming_operations_logger.error("Некорректный формат json")
-            return []
-    elif filename.suffix == ".csv":
-        with open(filename, encoding="utf-8") as file_csv:
-            reader = csv.DictReader(file_csv, delimiter=";")
-            csv_to_dict = list(reader)
 
-            return csv_to_dict
+            return []
+
+    elif filename.suffix == ".csv":
+
+        return from_csv()
 
     elif filename.suffix == ".xlsx":
-        excel_data = pd.read_excel(filename)
-        excel_to_dict = excel_data.to_dict(orient="records")
 
-        return excel_to_dict
+        return from_xlsx()
+
+
+def from_csv():
+    df = pd.read_csv(Path(ROOT_PATH, "transactions.csv"), delimiter=";")
+
+    df["operationAmount"] = df.apply(
+        lambda row: {"amount": row["amount"], "currensy": {"name": row["currency_name"], "code": row["currency_code"]}},
+        axis=1)
+
+    new_col_order = ["id", "state", "date", "operationAmount", "description", "from", "to"]
+    df = df[new_col_order]
+    list_of_dicts = df.to_dict(orient='records')
+
+    return list_of_dicts
+
+
+def from_xlsx():
+    df = pd.read_excel(Path(ROOT_PATH, "transactions_excel.xlsx"))
+
+    df["operationAmount"] = df.apply(
+        lambda row: {"amount": row["amount"], "currensy": {"name": row["currency_name"], "code": row["currency_code"]}},
+        axis=1)
+
+    new_col_order = ["id", "state", "date", "operationAmount", "description", "from", "to"]
+    df = df[new_col_order]
+    list_of_dicts = df.to_dict(orient='records')
+
+    return list_of_dicts
 
 
 # Применение функции
@@ -69,4 +97,5 @@ if __name__ == "__main__":
     # operations_path = Path(ROOT_PATH, "transactions_excel.xlsx")
 
     returned_list = transforming_operations(operations_path)
-    print(returned_list)
+    # print(returned_list)
+    print(returned_list[3])
