@@ -53,9 +53,10 @@ def converting_payment(transaction):
 
 if __name__ == "__main__":
     operations_path = Path(ROOT_PATH, "operations.json")
+
     returned_list = transforming_operations(operations_path)
     print(returned_list[0])
 
-    for i in range(1):
+    for i in range(2):
         one_operation = converting_payment(returned_list[i])
         print(one_operation)
