@@ -21,45 +21,38 @@ logging.basicConfig(
 transforming_operations_logger = logging.getLogger("utils.transforming_operations")
 
 
-def transforming_operations(filename):
+def transforming_operations():
     """
     Функцмя возвращает список транзакций в виде словарей, преобразованный из json-файла.
     """
-    if filename.suffix == ".json":
-        try:
-            transforming_operations_logger.info("запуск приложения")
-            with open(filename, encoding="utf-8") as file_json:
 
-                content = file_json.read().strip()
-                if not content:
-                    transforming_operations_logger.warning("Пустой список")
-                    return []
-                list_dicts = json.loads(content)
-                transforming_operations_logger.info("Преобразование списка в json формат")
+    filename = Path(ROOT_PATH, "operations.json")
+    try:
+        transforming_operations_logger.info("запуск приложения")
+        with open(filename, encoding="utf-8") as file_json:
 
-                if not isinstance(list_dicts, list):
-                    transforming_operations_logger.warning("На входе не список")
-                    return []
+            content = file_json.read().strip()
+            if not content:
+                transforming_operations_logger.warning("Пустой список")
+                return []
+            list_dicts = json.loads(content)
+            transforming_operations_logger.info("Преобразование списка в json формат")
 
-                return list_dicts
+            if not isinstance(list_dicts, list):
+                transforming_operations_logger.warning("На входе не список")
+                return []
 
-        except FileNotFoundError:
-            transforming_operations_logger.error("Файл не найден")
+            return list_dicts
 
-            return []
+    except FileNotFoundError:
+        transforming_operations_logger.error("Файл не найден")
 
-        except json.JSONDecodeError:
-            transforming_operations_logger.error("Некорректный формат json")
+        return []
 
-            return []
+    except json.JSONDecodeError:
+        transforming_operations_logger.error("Некорректный формат json")
 
-    elif filename.suffix == ".csv":
-
-        return from_csv()
-
-    elif filename.suffix == ".xlsx":
-
-        return from_xlsx()
+        return []
 
 
 def from_csv():
@@ -91,11 +84,16 @@ def from_xlsx():
 
 
 # Применение функции
-if __name__ == "__main__":
-    # operations_path = Path(ROOT_PATH, "operations.json")
-    operations_path = Path(ROOT_PATH, "transactions.csv")
-    # operations_path = Path(ROOT_PATH, "transactions_excel.xlsx")
+# if __name__ == "__main__":
 
-    returned_list = transforming_operations(operations_path)
-    # print(returned_list)
-    print(returned_list[3])
+# operations_path = Path(ROOT_PATH, "operations.json")
+# operations_path = Path(ROOT_PATH, "transactions.csv")
+# operations_path = Path(ROOT_PATH, "transactions_excel.xlsx")
+
+
+list_from_json = transforming_operations()
+list_from_csv = from_csv()
+list_from_excel = from_xlsx()
+
+# print(returned_list)
+# print(returned_list[3:10])
