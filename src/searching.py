@@ -26,8 +26,6 @@ def searching_category(list_transactions: List[Dict[str, Any]], list_category: L
     :return: словарь, где ключи — названия категорий, а значения — количество операций в каждой категории.
     """
 
-    dict_category = defaultdict(int)
-
     category_count = Counter()
 
     for transaction in list_transactions:

@@ -11,7 +11,7 @@ from data.config import ROOT_PATH
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    filename="../logs/utils.log",  # Запись логов в файл
+    filename="logs/utils.log",  # Запись логов в файл
     filemode="w",
 )  # Перезапись файла при каждом запуске
 """
@@ -94,6 +94,6 @@ def from_xlsx():
 list_from_json = transforming_operations()
 list_from_csv = from_csv()
 list_from_excel = from_xlsx()
-
+# print(list_from_csv[4])
 # print(returned_list)
 # print(returned_list[3:10])
