@@ -59,7 +59,7 @@ def from_csv():
     df = pd.read_csv(Path(ROOT_PATH, "transactions.csv"), delimiter=";")
 
     df["operationAmount"] = df.apply(
-        lambda row: {"amount": row["amount"], "currensy": {"name": row["currency_name"], "code": row["currency_code"]}},
+        lambda row: {"amount": row["amount"], "currency": {"name": row["currency_name"], "code": row["currency_code"]}},
         axis=1)
 
     new_col_order = ["id", "state", "date", "operationAmount", "description", "from", "to"]
@@ -73,7 +73,7 @@ def from_xlsx():
     df = pd.read_excel(Path(ROOT_PATH, "transactions_excel.xlsx"))
 
     df["operationAmount"] = df.apply(
-        lambda row: {"amount": row["amount"], "currensy": {"name": row["currency_name"], "code": row["currency_code"]}},
+        lambda row: {"amount": row["amount"], "currency": {"name": row["currency_name"], "code": row["currency_code"]}},
         axis=1)
 
     new_col_order = ["id", "state", "date", "operationAmount", "description", "from", "to"]

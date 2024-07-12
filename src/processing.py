@@ -36,7 +36,7 @@ def format_transaction(transaction):
     else:
         amount = "N/A"
 
-    currensy = transaction.get("operationAmount", {}).get("currency", {}).get("name", "N/A")
+    currency = transaction.get("operationAmount", {}).get("currency", {}).get("name", "N/A")
 
     from_field = transaction.get("from", {})
     to_field = transaction["to"]
@@ -47,23 +47,23 @@ def format_transaction(transaction):
 
     if transaction["description"] == "Перевод с карты на карту":
 
-        return f"{date_str} {description}\n{from_card} -> {to_card}\nСумма: {amount} {currensy}\n"
+        return f"{date_str} {description}\n{from_card} -> {to_card}\nСумма: {amount} {currency}\n"
 
     elif transaction["description"] == "Перевод со счета на счет":
 
-        return f"{date_str} {description}\n{from_account} -> {to_account}\nСумма: {amount} {currensy}\n"
+        return f"{date_str} {description}\n{from_account} -> {to_account}\nСумма: {amount} {currency}\n"
 
     elif transaction["description"] == "Перевод организации":
 
-        return f"{date_str} {description}\n{from_card} -> {to_account}\nСумма: {amount} {currensy}\n"
+        return f"{date_str} {description}\n{from_card} -> {to_account}\nСумма: {amount} {currency}\n"
 
     elif transaction["description"] == "Открытие вклада":
 
-        return f"{date_str} {description}\n{to_account}\nСумма: {amount} {currensy}\n"
+        return f"{date_str} {description}\n{to_account}\nСумма: {amount} {currency}\n"
 
     else:
 
-        return f"{date_str} {description}\nСчет {to_account}\nСумма: {amount} {currensy}\n"
+        return f"{date_str} {description}\nСчет {to_account}\nСумма: {amount} {currency}\n"
 
 
 if __name__ == "__main__":

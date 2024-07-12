@@ -59,12 +59,12 @@ def main():
             print("Ошибка ввода! Попробуйте ещё раз.")
 
     while True:
-        user_answer_for_currensy = input("Выводить только рублевые транзакции? Да/Нет: ").lower()
-        if user_answer_for_currensy == "да":
+        user_answer_for_currency = input("Выводить только рублевые транзакции? Да/Нет: ").lower()
+        if user_answer_for_currency == "да":
             transactions_sorted = [transaction for transaction in transactions_sorted if
-                                   transaction["operationAmount"]["currency"]["code"] == "RUB"]
+                                   transaction.get("operationAmount", {}).get("currency", {}).get("code", {}) == "RUB"]
             break
-        elif user_answer_for_currensy == "нет":
+        elif user_answer_for_currency == "нет":
             break
         else:
             print("Ошибка ввода! Попробуйте ещё раз.")
@@ -82,18 +82,15 @@ def main():
             print("Ошибка ввода! Попробуйте ещё раз.")
 
     print("Распечатываю итоговый список транзакций...")
-    print()
+    print(transactions_sorted)
 
     if len(transactions_sorted) > 0:
         print(f"Всего банковских операций в выборке: {len(transactions_sorted)}\n")
         # print(transactions_sorted)
         for transaction in transactions_sorted:
             print(format_transaction(transaction))
-
-        return None
-
     else:
-        return "Не найдено ни одной транзакции, подходящей под ваши условия фильтрации"
+        print("Не найдено ни одной транзакции, подходящей под ваши условия фильтрации")
 
 
 main()
