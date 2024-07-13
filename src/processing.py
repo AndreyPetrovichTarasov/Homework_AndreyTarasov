@@ -1,8 +1,6 @@
 import math
 from dateutil.parser import parse
 from typing import Dict, List
-from src.masks import get_mask_account, get_mask_card_number
-from src.widget import get_data
 from src.utils import list_from_csv
 from src.widget import mask_account_card
 
@@ -20,6 +18,7 @@ def sort_by_date(list_id: List[Dict], reverse: bool = True) -> List[Dict]:
 
 
 def format_transaction(transaction):
+    """Форматирование финального вывода в консоль"""
     date_str = transaction.get("date", "N/A")
     if date_str != "N/A":
         date_str = parse(date_str).strftime("%d.%m.%Y")

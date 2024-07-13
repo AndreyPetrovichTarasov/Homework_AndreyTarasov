@@ -2,7 +2,6 @@ import json
 import logging
 import sys
 from pathlib import Path
-import csv
 import pandas as pd
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
@@ -56,6 +55,7 @@ def transforming_operations():
 
 
 def from_csv():
+    """Преобразование из csv-файла в python-объект"""
     df = pd.read_csv(Path(ROOT_PATH, "transactions.csv"), delimiter=";")
 
     df["operationAmount"] = df.apply(
@@ -70,6 +70,7 @@ def from_csv():
 
 
 def from_xlsx():
+    """Преобразование из эксель-файла в python-объект"""
     df = pd.read_excel(Path(ROOT_PATH, "transactions_excel.xlsx"))
 
     df["operationAmount"] = df.apply(

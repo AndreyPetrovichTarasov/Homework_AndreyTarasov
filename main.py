@@ -1,5 +1,3 @@
-import logging
-import re
 from src.user_input import user_input, choice_status
 from src.utils import transforming_operations, from_csv, from_xlsx
 from src.processing import filter_by_state, sort_by_date
